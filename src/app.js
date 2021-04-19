@@ -72,3 +72,19 @@ let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("Toronto");
+
+function showCelciusTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  fahrenheitLink.classList.add("active");
+  let celciusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
+  temperatureElement.innerHTML = Math.round(celciusTemperature);
+}
+function showFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celciusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+let fahrenheitTemperature = null;
