@@ -73,18 +73,16 @@ currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("Toronto");
 
-function showCelciusTemperature(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  fahrenheitLink.classList.add("active");
-  let celciusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
-  temperatureElement.innerHTML = Math.round(celciusTemperature);
+function cToF(celsius) {
+  var cTemp = celsius;
+  var cToFahr = (cTemp * 9) / 5 + 32;
+  var message = cTemp + "\xB0C is " + cToFahr + " \xB0F.";
+  celsius.innerHTML = cToF("#celsius");
 }
-function showFahrenheitTemperature(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  celciusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+
+function fToC(fahrenheit) {
+  var fTemp = fahrenheit;
+  var fToCel = ((fTemp - 32) * 5) / 9;
+  var message = fTemp + "\xB0F is " + fToCel + "\xB0C.";
+  fahrenheit.innerHTML = cToF("#fahrenheit");
 }
-let fahrenheitTemperature = null;
