@@ -73,16 +73,32 @@ currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("Toronto");
 
-function cToF(celsius) {
-  var cTemp = celsius;
-  var cToFahr = (cTemp * 9) / 5 + 32;
-  var message = cTemp + "\xB0C is " + cToFahr + " \xB0F.";
-  celsius.innerHTML = cToF("#celsius");
+function cToF(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  let cToFahr = Math.round((celsiusTemperature * 9) / 5 + 32);
+  temperatureElement.innerHTML = cToFahr;
 }
-
-function fToC(fahrenheit) {
-  var fTemp = fahrenheit;
-  var fToCel = ((fTemp - 32) * 5) / 9;
-  var message = fTemp + "\xB0F is " + fToCel + "\xB0C.";
-  fahrenheit.innerHTML = cToF("#fahrenheit");
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", cToF);
+function fToC(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", fToC);
+let celsiusTemperature = null;
+function displayWeatherCondition(response) {
+  document.querySelector("#city").innerHTML = response.data.name;
+  document.querySelector("#temperature").innerHTML = Math.round(
+    response.data.main.temp
+  );
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].main;
+  celsiusTemperature = response.data.main.temp;
 }
