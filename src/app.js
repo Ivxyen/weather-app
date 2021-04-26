@@ -124,23 +124,6 @@ searchForm.addEventListener("submit", handleSubmit);
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-function cToF(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  let cToFahr = Math.round((celsiusTemperature * 9) / 5 + 32);
-  temperatureElement.innerHTML = cToFahr;
-}
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", cToF);
-function fToC(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", fToC);
-let celsiusTemperature = null;
-
 function displayWeatherCondition(response) {
   document.querySelector("#city").innerHTML = response.data.name;
   document.querySelector("#temperature").innerHTML = Math.round(
